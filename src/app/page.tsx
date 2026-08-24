@@ -2,10 +2,28 @@
 
 import { motion } from "framer-motion";
 
+const features = [
+  {
+    title: "App Router",
+    description:
+      "Built on Next.js's app directory, so routing, layouts, and metadata just work.",
+  },
+  {
+    title: "Tailwind CSS v4",
+    description:
+      "Utility-first styling with automatic light and dark theming baked in.",
+  },
+  {
+    title: "Framer Motion",
+    description:
+      "Animation primitives are wired up and ready — fade, slide, and scroll effects out of the box.",
+  },
+];
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-center gap-6 py-32 px-16 text-center">
+    <div className="flex flex-col flex-1 bg-zinc-50 font-sans dark:bg-black">
+      <main className="flex flex-1 w-full max-w-3xl mx-auto flex-col items-center justify-center gap-6 py-32 px-16 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,6 +55,32 @@ export default function Home() {
           Get started
         </motion.button>
       </main>
+
+      <section className="w-full max-w-5xl mx-auto px-16 pb-32">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+              className="rounded-2xl border border-black/[.08] bg-white p-6 text-left dark:border-white/[.1] dark:bg-zinc-900"
+            >
+              <h2 className="text-base font-semibold text-black dark:text-zinc-50">
+                {feature.title}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <footer className="w-full border-t border-black/[.08] py-8 text-center text-sm text-zinc-500 dark:border-white/[.1] dark:text-zinc-500">
+        Built with Next.js and Framer Motion.
+      </footer>
     </div>
   );
 }
